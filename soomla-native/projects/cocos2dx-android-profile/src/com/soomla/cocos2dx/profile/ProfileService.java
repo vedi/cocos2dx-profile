@@ -3,11 +3,13 @@ package com.soomla.cocos2dx.profile;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import com.soomla.cocos2dx.common.DomainFactory;
+import com.soomla.cocos2dx.common.NdkGlue;
+import com.soomla.profile.SoomlaProfile;
+import com.soomla.profile.domain.IProvider;
 import com.soomla.profile.domain.UserProfile;
-import com.soomla.profile.domain.rewards.BadgeReward;
-import com.soomla.profile.domain.rewards.RandomReward;
-import com.soomla.profile.domain.rewards.SequenceReward;
-import com.soomla.profile.domain.rewards.VirtualItemReward;
+import com.soomla.profile.domain.rewards.*;
+import com.soomla.profile.exceptions.ProviderNotFoundException;
+import com.soomla.profile.exceptions.UserProfileNotFoundException;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +44,10 @@ public class ProfileService {
 
     public ProfileService() {
         profileEventHandlerBridge = new ProfileEventHandlerBridge();
-        DomainFactory.getInstance().registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_BADGE, new DomainFactory.Creator<BadgeReward>() {
+
+        final DomainFactory domainFactory = DomainFactory.getInstance();
+
+        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_BADGE, new DomainFactory.Creator<BadgeReward>() {
             @Override
             public BadgeReward create(JSONObject jsonObject) {
                 try {
@@ -52,7 +57,7 @@ public class ProfileService {
                 }
             }
         });
-        DomainFactory.getInstance().registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_RANDOM, new DomainFactory.Creator<RandomReward>() {
+        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_RANDOM, new DomainFactory.Creator<RandomReward>() {
             @Override
             public RandomReward create(JSONObject jsonObject) {
                 try {
@@ -62,7 +67,7 @@ public class ProfileService {
                 }
             }
         });
-        DomainFactory.getInstance().registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_SEQUENCE, new DomainFactory.Creator<SequenceReward>() {
+        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_SEQUENCE, new DomainFactory.Creator<SequenceReward>() {
             @Override
             public SequenceReward create(JSONObject jsonObject) {
                 try {
@@ -72,7 +77,7 @@ public class ProfileService {
                 }
             }
         });
-        DomainFactory.getInstance().registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_ITEM, new DomainFactory.Creator<VirtualItemReward>() {
+        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_ITEM, new DomainFactory.Creator<VirtualItemReward>() {
             @Override
             public VirtualItemReward create(JSONObject jsonObject) {
                 try {
@@ -82,7 +87,7 @@ public class ProfileService {
                 }
             }
         });
-        DomainFactory.getInstance().registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_USER_PROFILE, new DomainFactory.Creator<UserProfile>() {
+        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_USER_PROFILE, new DomainFactory.Creator<UserProfile>() {
             @Override
             public UserProfile create(JSONObject jsonObject) {
                 try {
@@ -92,6 +97,111 @@ public class ProfileService {
                 }
             }
         });
+
+        final NdkGlue ndkGlue = NdkGlue.getInstance();
+
+        ndkGlue.registerCallHandler("CCProfileService::init", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                ProfileService.getInstance().init();
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::login", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                JSONObject rewardJson = params.optJSONObject("reward");
+                Reward reward = (rewardJson != null) ?
+                        domainFactory.<Reward>createWithJsonObject(rewardJson) : null;
+                SoomlaProfile.getInstance().login(ndkGlue.getActivityRef().get(), IProvider.Provider.getEnum(provider), reward);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::logout", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                SoomlaProfile.getInstance().logout(IProvider.Provider.getEnum(provider));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::getStoredUserProfile", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                UserProfile userProfile = SoomlaProfile.getInstance().getStoredUserProfile(IProvider.Provider.getEnum(provider));
+                if (userProfile != null) {
+                    retParams.put("return", userProfile.toJSONObject());
+                }
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::updateStatus", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                String status = params.getString("status");
+                JSONObject rewardJson = params.optJSONObject("reward");
+                Reward reward = (rewardJson != null) ?
+                        domainFactory.<Reward>createWithJsonObject(rewardJson) : null;
+                SoomlaProfile.getInstance().updateStatus(IProvider.Provider.getEnum(provider), status, reward);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::updateStory", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                String message = params.getString("message");
+                String name = params.getString("name");
+                String caption = params.getString("caption");
+                String description = params.getString("description");
+                String link = params.getString("link");
+                String picture = params.getString("picture");
+                JSONObject rewardJson = params.optJSONObject("reward");
+                Reward reward = (rewardJson != null) ?
+                        domainFactory.<Reward>createWithJsonObject(rewardJson) : null;
+                SoomlaProfile.getInstance().updateStory(IProvider.Provider.getEnum(provider), message, name, caption,
+                        description, link, picture, reward);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::uploadImage", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                String message = params.getString("message");
+                String filePath = params.getString("filePath");
+                JSONObject rewardJson = params.optJSONObject("reward");
+                Reward reward = (rewardJson != null) ?
+                        domainFactory.<Reward>createWithJsonObject(rewardJson) : null;
+                SoomlaProfile.getInstance().uploadImage(IProvider.Provider.getEnum(provider), message, filePath,
+                        reward);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCProfileController::getContacts", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String provider = params.getString("provider");
+                JSONObject rewardJson = params.optJSONObject("reward");
+                Reward reward = (rewardJson != null) ?
+                        domainFactory.<Reward>createWithJsonObject(rewardJson) : null;
+                SoomlaProfile.getInstance().getContacts(IProvider.Provider.getEnum(provider), reward);
+            }
+        });
+
+
+        final NdkGlue.ExceptionHandler exceptionHandler = new NdkGlue.ExceptionHandler() {
+            @Override
+            public void handle(Exception exception, JSONObject params, JSONObject retParams) throws Exception {
+                retParams.put("errorInfo", exception.getClass().getName());
+            }
+        };
+
+        ndkGlue.registerExceptionHandler(ProviderNotFoundException.class.getName(), exceptionHandler);
+        ndkGlue.registerExceptionHandler(UserProfileNotFoundException.class.getName(), exceptionHandler);
     }
 
     public void init() {
@@ -104,7 +214,7 @@ public class ProfileService {
     }
 
     public void setActivity(Activity activity) {
-        ProfileNdkGlue.setActivity(activity);
+        NdkGlue.getInstance().setActivity(activity);
     }
 
     public void setGlSurfaceView(Cocos2dxGLSurfaceView glSurfaceView) {

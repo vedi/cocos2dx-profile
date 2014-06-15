@@ -4,7 +4,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface ProfileService : NSObject
 + (id)sharedProfileService;
 @end

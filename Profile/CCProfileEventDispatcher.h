@@ -1,5 +1,5 @@
-#ifndef __CCSoomla_H_
-#define __CCSoomla_H_
+#ifndef __CCProfileEventDispatcher_H_
+#define __CCProfileEventDispatcher_H_
 
 #include "cocos2d.h"
 #include "CCProfileEventHandler.h"
@@ -13,22 +13,21 @@ namespace soomla {
 		it to your event handler call addEventHandler(). You also set parameters
 		for StoreController through this class.
 	 */
-    class CCProfileEventDispatcher : public cocos2d::Ref {
+    class CCProfileEventDispatcher : public CCProfileEventHandler {
 	private:
-        cocos2d::__Set mEventHandlers;
+        cocos2d::__Set *mEventHandlers;
     public:
 		/**
 		   This class is singleton, access it with this function.
 		 */
         static CCProfileEventDispatcher *getInstance();
 
-        virtual ~CCProfileEventDispatcher();
+        CCProfileEventDispatcher():
+                mEventHandlers(NULL) {
+        }
+        bool init();
 
-		/**
-		   Call an NDK function by name and parameters.
-		   \param parameters A dictionary containing the function to call and parameters to pass to it.
-		 */
-        void ndkCallBack(cocos2d::__Dictionary *parameters);
+        virtual ~CCProfileEventDispatcher();
 
 		/**
 		   Add an event handler. This retains the event handler.
@@ -42,10 +41,40 @@ namespace soomla {
 		*/
 		void removeEventHandler(CCProfileEventHandler *eventHandler);
 
+        virtual void onLoginFailed(cocos2d::__String *errorDescription);
+
+        virtual void onLoginFinished(CCUserProfile *userProfile);
+
+        virtual void onLoginStarted(cocos2d::__String *provider);
+
+        virtual void onLogoutFailed(cocos2d::__String *errorDescription);
+
+        virtual void onLogoutFinished(CCUserProfile *userProfile);
+
+        virtual void onLogoutStarted(cocos2d::__String *provider);
+
+        virtual void onGetContactsFailed(cocos2d::__String *socialActionType, cocos2d::__String *errorDescription);
+
+        virtual void onGetContactsFinished(cocos2d::__String *socialActionType, cocos2d::__Array *contactsDict);
+
+        virtual void onGetContactsStarted(cocos2d::__String *socialActionType);
+
+        virtual void onSocialActionFailedEvent(cocos2d::__String *socialActionType, cocos2d::__String *errorDescription);
+
+        virtual void onSocialActionFinishedEvent(cocos2d::__String *socialActionType);
+
+        virtual void onSocialActionStartedEvent(cocos2d::__String *socialActionType);
+
+        virtual void onLoginCancelledEvent();
+
+        virtual void onRewardGivenEvent(CCReward *reward);
+
+        virtual void onUserProfileUpdatedEvent(CCUserProfile *userProfile);
+
     private:
         CCUserProfile *extractUserProfile(Ref *userProfileRef);
         cocos2d::__Array *extractUserProfileArray(Ref *userProfileDictArray);
     };
 };
 
-#endif //__CCSoomla_H_
+#endif //__CCProfileEventDispatcher_H_

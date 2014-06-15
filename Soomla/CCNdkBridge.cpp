@@ -2,7 +2,7 @@
 // Created by Fedor Shubin on 5/20/13.
 //
 
-#include "CCProfileNdkBridge.h"
+#include "CCNdkBridge.h"
 #include "CCJsonHelper.h"
 
 USING_NS_CC;
@@ -18,17 +18,17 @@ USING_NS_CC;
     #include "platform/android/jni/JniHelper.h"
     #include <jni.h>
     #include <string>
-    #include "CCProfileEventDispatcher.h"
+    #include "CCEventDispatcher.h"
 #ifdef COCOS2D_JAVASCRIPT
     #include "jsb/JSBinding.h"
 #endif
 
-    #define CLASS_NAME "com/soomla/cocos2dx/profile/ProfileNDKGlue"
+    #define CLASS_NAME "com/soomla/cocos2dx/common/NdkGlue"
 #endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 
-#import "CCProfileNdkBridgeIos.h"
+#import "CCNdkBridgeIos.h"
 
 #endif
 
@@ -37,7 +37,7 @@ namespace soomla {
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         // Method for receiving NDK messages
-        void Java_com_soomla_cocos2dx_profile_ProfileNDKGlue_receiveCppMessage(JNIEnv* env, jobject thiz, jstring json)
+        void Java_com_soomla_cocos2dx_common_NdkGlue_sendCppMessage(JNIEnv* env, jobject thiz, jstring json)
         {
             std::string jsonString = JniHelper::jstring2string(json);
             const char *jsonCharArray = jsonString.c_str();
@@ -57,21 +57,21 @@ namespace soomla {
 #ifdef COCOS2D_JAVASCRIPT
             Soomla::JSBinding::callCallback((cocos2d::__Dictionary *) dataToPass);
 #else
-            CCProfileEventDispatcher::getInstance()->ndkCallBack((cocos2d::__Dictionary *)dataToPass);
+            CCEventDispatcher::getInstance()->ndkCallback((cocos2d::__Dictionary *)dataToPass);
 #endif
 
             json_decref(root);
         }
 #endif
 
-        cocos2d::Ref *CCProfileNdkBridge::callNative(cocos2d::__Dictionary *params, CCProfileError **pError) {
+        cocos2d::Ref *CCNdkBridge::callNative(cocos2d::__Dictionary *params, CCError **pError) {
             cocos2d::__Dictionary *methodParams = params;
 
             json_t *toBeSentJson = CCJsonHelper::getJsonFromCCObject(methodParams);
             json_t *retJsonParams = NULL;
 
 #if (LOG_JSON == 1)
-            CCStoreUtils::logDebug(TAG, CCString::createWithFormat(
+            CCStoreUtils::logDebug(TAG, __String::createWithFormat(
                     "to native JSON: %s", json_dumps(toBeSentJson, JSON_COMPACT | JSON_ENSURE_ASCII))->getCString());
 #endif
 
@@ -109,11 +109,11 @@ namespace soomla {
                 }
             }
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            retJsonParams = soomla::CCProfileNdkBridgeIos::receiveCppMessage(toBeSentJson);
+            retJsonParams = soomla::CCNdkBridgeIos::receiveCppMessage(toBeSentJson);
 #endif
 
 #if (LOG_JSON == 1)
-            CCStoreUtils::logDebug(TAG, CCString::createWithFormat(
+            CCStoreUtils::logDebug(TAG, __String::createWithFormat(
                     "from native JSON: %s", json_dumps(retJsonParams, JSON_COMPACT | JSON_ENSURE_ASCII))->getCString());
 #endif
 
@@ -124,7 +124,7 @@ namespace soomla {
                 json_decref(retJsonParams);
             }
 
-            CCProfileError *error = CCProfileError::createWithObject(retParams);
+            CCError *error = CCError::createWithObject(retParams);
             if (error != NULL) {
                 *pError = error;
             }

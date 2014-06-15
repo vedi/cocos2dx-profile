@@ -17,8 +17,8 @@
 #include "CCUserProfile.h"
 #include "CCReward.h"
 
-#ifndef __CCEventHandler__
-#define __CCEventHandler__
+#ifndef __CCProfileEventHandler__
+#define __CCProfileEventHandler__
 
 namespace soomla {
     class CCProfileEventHandler : public cocos2d::Ref {
@@ -42,4 +42,4 @@ namespace soomla {
 
 };
 
-#endif /* defined(__CCEventHandler__) */
+#endif /* defined(__CCProfileEventHandler__) */

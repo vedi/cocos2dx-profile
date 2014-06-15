@@ -6,9 +6,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := cocos2dx_profile_static
 LOCAL_MODULE_FILENAME := libcocos2dxprofile
 LOCAL_SRC_FILES := ../../Profile/CCProfileController.cpp \
-	../../Profile/CCProfileError.cpp \
 	../../Profile/CCProfileEventDispatcher.cpp \
-	../../Profile/CCProfileNdkBridge.cpp \
+  ../../Profile/CCProfileService.cpp \
 	../../Profile/data/CCProfileJsonConsts.cpp \
 	../../Profile/domain/CCUserProfile.cpp \
 	../../Profile/domain/rewards/CCAggregateReward.cpp \
@@ -19,7 +18,10 @@ LOCAL_SRC_FILES := ../../Profile/CCProfileController.cpp \
 	../../Profile/domain/rewards/CCVirtualItemReward.cpp \
 	../../Soomla/CCDomainFactory.cpp \
 	../../Soomla/CCDomainHelper.cpp \
+  ../../Soomla/CCError.cpp \
+	../../Soomla/CCEventDispatcher.cpp \
 	../../Soomla/CCJsonHelper.cpp \
+  ../../Soomla/CCNdkBridge.cpp \
 	../../Soomla/data/CCCommonJsonConsts.cpp \
 	../../Soomla/domain/CCDomain.cpp
 

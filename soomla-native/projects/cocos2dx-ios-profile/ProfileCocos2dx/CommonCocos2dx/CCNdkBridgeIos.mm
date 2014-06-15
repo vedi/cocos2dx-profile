@@ -3,18 +3,18 @@
 //
 
 
-#include "CCProfileNdkBridgeIos.h"
+#include "CCNdkBridgeIos.h"
 #include "CCRef.h"
 #include "CCJsonHelper.h"
-#include "CCProfileEventDispatcher.h"
-#include "ProfileNdkGlue.h"
+#include "NdkGlue.h"
+#include "CCEventDispatcher.h"
 
 #ifdef COCOS2D_JAVASCRIPT
 #include "JSBinding.h"
 #endif
 
 namespace soomla {
-    json_t *CCProfileNdkBridgeIos::receiveCppMessage(json_t *jsonParams) {
+    json_t *CCNdkBridgeIos::receiveCppMessage(json_t *jsonParams) {
         char *pszJsonParams = json_dumps(jsonParams, JSON_COMPACT | JSON_ENSURE_ASCII);
         NSString *jsonParamsStr = [[NSString alloc] initWithUTF8String: pszJsonParams];
         free(pszJsonParams);
@@ -30,7 +30,7 @@ namespace soomla {
 
         [jsonParamsStr release];
         if (error == nil) {
-            NSObject *retParamsNs = [ProfileNdkGlue dispatchNDKCall:dictParams];
+            NSObject *retParamsNs = [[NdkGlue sharedInstance] dispatchNdkCall:dictParams];
 
             if (retParamsNs != nil) {
                 error = nil;
@@ -66,12 +66,12 @@ namespace soomla {
         }
     }
 
-    void CCProfileNdkBridgeIos::ndkCallback(json_t *jsonParams) {
+    void CCNdkBridgeIos::ndkCallback(json_t *jsonParams) {
         cocos2d::Ref *dataToPass = CCJsonHelper::getCCObjectFromJson(jsonParams);
 #ifdef COCOS2D_JAVASCRIPT
         Soomla::JSBinding::callCallback((cocos2d::__Dictionary *) dataToPass);
 #else
-        CCProfileEventDispatcher::getInstance()->ndkCallBack((cocos2d::__Dictionary *)dataToPass);
+        CCEventDispatcher::getInstance()->ndkCallback((cocos2d::__Dictionary *) dataToPass);
 #endif
     }
 }

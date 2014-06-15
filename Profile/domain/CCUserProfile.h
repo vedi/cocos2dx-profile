@@ -25,7 +25,7 @@ namespace soomla {
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLanguage, Language, JSON_LANGUAGE);
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mBirthday, Birthday, JSON_BIRTHDAY);
     public:
-        CCUserProfile() : CCDomain(), mProfileId(NULL), mEmail(NULL) , mUsername(NULL),
+        CCUserProfile() : CCDomain(), mProvider(NULL), mProfileId(NULL), mEmail(NULL) , mUsername(NULL),
                           mFirstName(NULL), mLastName(NULL), mAvatarLink(NULL), mLocation(NULL) ,
                           mGender(NULL), mLanguage(NULL), mBirthday(NULL) {};
 

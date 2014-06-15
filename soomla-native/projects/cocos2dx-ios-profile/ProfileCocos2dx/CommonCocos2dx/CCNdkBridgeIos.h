@@ -9,7 +9,7 @@
 #include "jansson.h"
 
 namespace soomla {
-    class CCProfileNdkBridgeIos {
+    class CCNdkBridgeIos {
     public:
         static json_t *receiveCppMessage(json_t *jsonParams);
         static void ndkCallback(json_t *jsonParams);

@@ -2,6 +2,7 @@ package com.soomla.cocos2dx.profile;
 
 import android.opengl.GLSurfaceView;
 import com.soomla.cocos2dx.common.DomainHelper;
+import com.soomla.cocos2dx.common.NdkGlue;
 import com.soomla.profile.events.RewardGivenEvent;
 import com.soomla.profile.events.UserProfileUpdatedEvent;
 import com.soomla.profile.events.auth.*;
@@ -31,7 +32,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LoginFailedEvent");
                     parameters.put("errorDescription", loginFailedEvent.ErrorDescription);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -48,7 +49,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LoginFinishedEvent");
                     parameters.put("userProfile", loginFinishedEvent.UserProfile.toJSONObject());
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -65,7 +66,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LoginStartedEvent");
                     parameters.put("provider", loginStartedEvent.Provider);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -82,7 +83,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LogoutFailedEvent");
                     parameters.put("errorDescription", logoutFailedEvent.ErrorDescription);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -99,7 +100,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LogoutFinishedEvent");
                     parameters.put("userProfile", logoutFinishedEvent.UserProfile.toJSONObject());
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -116,7 +117,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LogoutStartedEvent");
                     parameters.put("provider", logoutStartedEvent.Provider);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -134,7 +135,7 @@ public class ProfileEventHandlerBridge {
                     parameters.put("method", "com.soomla.profile.events.social.GetContactsFailedEvent");
                     parameters.put("socialActionType", getContactsFailedEvent.SocialActionType);
                     parameters.put("errorDescription", getContactsFailedEvent.ErrorDescription);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -152,7 +153,7 @@ public class ProfileEventHandlerBridge {
                     parameters.put("method", "com.soomla.profile.events.social.GetContactsFinishedEvent");
                     parameters.put("socialActionType", getContactsFinishedEvent.SocialActionType);
                     parameters.put("contacts", DomainHelper.getInstance().getJsonObjectListFromDomains(getContactsFinishedEvent.Contacts));
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -169,7 +170,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.social.GetContactsStartedEvent");
                     parameters.put("socialActionType", getContactsStartedEvent.SocialActionType);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -187,7 +188,7 @@ public class ProfileEventHandlerBridge {
                     parameters.put("method", "com.soomla.profile.events.social.SocialActionFailedEvent");
                     parameters.put("socialActionType", socialActionFailedEvent.SocialActionType);
                     parameters.put("errorDescription", socialActionFailedEvent.ErrorDescription);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -204,7 +205,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.social.SocialActionFinishedEvent");
                     parameters.put("socialActionType", socialActionFinishedEvent.SocialActionType);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -221,7 +222,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.social.SocialActionStartedEvent");
                     parameters.put("socialActionType", socialActionStartedEvent.SocialActionType);
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -238,7 +239,7 @@ public class ProfileEventHandlerBridge {
                 try {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.auth.LoginCancelledEvent");
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -255,7 +256,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.RewardGivenEvent");
                     parameters.put("reward", rewardGivenEvent.getReward().toJSONObject());
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
@@ -272,7 +273,7 @@ public class ProfileEventHandlerBridge {
                     JSONObject parameters = new JSONObject();
                     parameters.put("method", "com.soomla.profile.events.UserProfileUpdatedEvent");
                     parameters.put("userProfile", userProfileUpdatedEvent.UserProfile.toJSONObject());
-                    ProfileNdkGlue.sendMessageWithParameters(parameters);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);
                 }
