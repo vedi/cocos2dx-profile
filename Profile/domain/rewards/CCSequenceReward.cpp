@@ -24,5 +24,5 @@ soomla::CCSequenceReward::~CCSequenceReward() {
 }
 
 const char *soomla::CCSequenceReward::getType() {
-    return JSON_JSON_TYPE_SEQUENCE;
+    return CCProfileConsts::JSON_JSON_TYPE_SEQUENCE;
 }

@@ -79,7 +79,9 @@ namespace soomla {
         params->setObject(__String::create("CCProfileController::updateStatus"), "method");
         params->setObject(__String::create(provider), "provider");
         params->setObject(__String::create(status), "status");
-        params->setObject(reward->toDictionary(), "reward");
+        if (reward) {
+            params->setObject(reward->toDictionary(), "reward");
+        }
         CCNdkBridge::callNative(params, soomlaError);
     }
 

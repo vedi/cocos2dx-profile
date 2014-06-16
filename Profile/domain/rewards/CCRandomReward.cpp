@@ -24,5 +24,5 @@ soomla::CCRandomReward::~CCRandomReward() {
 }
 
 const char *soomla::CCRandomReward::getType() {
-    return JSON_JSON_TYPE_RANDOM;
+    return CCProfileConsts::JSON_JSON_TYPE_RANDOM;
 }

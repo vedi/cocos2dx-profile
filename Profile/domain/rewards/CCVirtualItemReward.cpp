@@ -65,5 +65,5 @@ soomla::CCVirtualItemReward::~CCVirtualItemReward() {
 }
 
 const char *soomla::CCVirtualItemReward::getType() {
-    return JSON_JSON_TYPE_ITEM;
+    return CCProfileConsts::JSON_JSON_TYPE_ITEM;
 }

@@ -9,9 +9,9 @@
 #include "domain/rewards/CCVirtualItemReward.h"
 #include "domain/CCUserProfile.h"
 #include "CCProfileEventHandler.h"
-#includeCCError
+#include "CCError.h"
 #include "CCProfileEventDispatcher.h"
-#includeCCNdkBridge
+#include "CCNdkBridge.h"
 #include "CCProfileController.h"
 
 #endif /* !_Cocos2dxSoomla_H */

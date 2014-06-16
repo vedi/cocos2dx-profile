@@ -1,0 +1,58 @@
+#ifndef __CCProfileConsts_H__
+#define __CCProfileConsts_H__
+
+#include "CCCommonJsonConsts.h"
+
+namespace soomla {
+    class CCProfileConsts {
+    public:
+        static char const *JSON_REWARD_ID;
+        static char const *JSON_NAME;
+        static char const *JSON_REPEATABLE;
+        static char const *JSON_ICON_URL;
+        static char const *JSON_REWARDS;
+        static char const *JSON_AMOUNT;
+        static char const *JSON_ASSOCIATED_ITEM_ID;
+
+        static char const *JSON_PROVIDER;
+        static char const *JSON_PROFILE_ID;
+        static char const *JSON_USERNAME;
+        static char const *JSON_EMAIL;
+        static char const *JSON_FIRST_NAME;
+        static char const *JSON_LAST_NAME;
+        static char const *JSON_AVATAR_LINK;
+        static char const *JSON_LOCATION;
+        static char const *JSON_GENDER;
+        static char const *JSON_LANGUAGE;
+        static char const *JSON_BIRTHDAY;
+
+        static char const *JSON_JSON_TYPE_BADGE;
+        static char const *JSON_JSON_TYPE_RANDOM;
+        static char const *JSON_JSON_TYPE_SEQUENCE;
+        static char const *JSON_JSON_TYPE_ITEM;
+        static char const *JSON_JSON_TYPE_USER_PROFILE;
+
+        static char const *EVENT_LOGIN_CANCELLED;
+        static char const *EVENT_LOGIN_FAILED;
+        static char const *EVENT_LOGIN_FINISHED;
+        static char const *EVENT_LOGIN_STARTED;
+
+        static char const *EVENT_LOGOUT_FAILED;
+        static char const *EVENT_LOGOUT_FINISHED;
+        static char const *EVENT_LOGOUT_STARTED;
+
+        static char const *EVENT_GET_CONTACTS_FAILED;
+        static char const *EVENT_GET_CONTACTS_FINISHED;
+        static char const *EVENT_GET_CONTACTS_STARTED;
+
+        static char const *EVENT_SOCIAL_ACTION_FAILED;
+        static char const *EVENT_SOCIAL_ACTION_FINISHED;
+        static char const *EVENT_SOCIAL_ACTION_STARTED;
+
+        static char const *EVENT_REWARD_GIVEN;
+
+        static char const *EVENT_USER_PROFILE_UPDATED;
+    };
+}
+
+#endif /* defined(__CCProfileConsts_H__) */

@@ -8,22 +8,22 @@
 
 #include "cocos2d.h"
 #include "SoomlaProfileMacros.h"
-#include "CCProfileJsonConsts.h"
+#include "CCProfileConsts.h"
 #include "CCDomain.h"
 
 namespace soomla {
     class CCUserProfile : public CCDomain {
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mProvider, Provider, JSON_PROVIDER);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mProfileId, ProfileId, JSON_PROFILE_ID);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mEmail, Email, JSON_EMAIL);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mUsername, Username, JSON_USERNAME);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mFirstName, FirstName, JSON_FIRST_NAME);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLastName, LastName, JSON_LAST_NAME);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAvatarLink, AvatarLink, JSON_AVATAR_LINK);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLocation, Location, JSON_LOCATION);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mGender, Gender, JSON_GENDER);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLanguage, Language, JSON_LANGUAGE);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mBirthday, Birthday, JSON_BIRTHDAY);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mProvider, Provider, CCProfileConsts::JSON_PROVIDER);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mProfileId, ProfileId, CCProfileConsts::JSON_PROFILE_ID);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mEmail, Email, CCProfileConsts::JSON_EMAIL);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mUsername, Username, CCProfileConsts::JSON_USERNAME);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mFirstName, FirstName, CCProfileConsts::JSON_FIRST_NAME);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLastName, LastName, CCProfileConsts::JSON_LAST_NAME);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAvatarLink, AvatarLink, CCProfileConsts::JSON_AVATAR_LINK);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLocation, Location, CCProfileConsts::JSON_LOCATION);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mGender, Gender, CCProfileConsts::JSON_GENDER);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mLanguage, Language, CCProfileConsts::JSON_LANGUAGE);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mBirthday, Birthday, CCProfileConsts::JSON_BIRTHDAY);
     public:
         CCUserProfile() : CCDomain(), mProvider(NULL), mProfileId(NULL), mEmail(NULL) , mUsername(NULL),
                           mFirstName(NULL), mLastName(NULL), mAvatarLink(NULL), mLocation(NULL) ,

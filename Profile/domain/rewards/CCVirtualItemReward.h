@@ -10,9 +10,9 @@
 
 namespace soomla {
     class CCVirtualItemReward : public CCReward {
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Integer *, mAmount, Amount, JSON_AMOUNT);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Integer *, mAmount, Amount, CCProfileConsts::JSON_AMOUNT);
 
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, JSON_ASSOCIATED_ITEM_ID);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, CCProfileConsts::JSON_ASSOCIATED_ITEM_ID);
 
     public:
         static CCVirtualItemReward *create(
