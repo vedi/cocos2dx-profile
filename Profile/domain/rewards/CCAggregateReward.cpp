@@ -38,8 +38,6 @@ cocos2d::__Dictionary *soomla::CCAggregateReward::toDictionary() {
         dict->setObject(dictArray, CCProfileConsts::JSON_REWARDS);
     }
 
-    dict->setObject(cocos2d::__String::create(CCProfileConsts::JSON_JSON_TYPE_RANDOM), JSON_JSON_TYPE);
-
     return dict;
 }
 

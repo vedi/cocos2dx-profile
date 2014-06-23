@@ -1,7 +1,7 @@
 #ifndef __CCProfileConsts_H__
 #define __CCProfileConsts_H__
 
-#include "CCCommonJsonConsts.h"
+#include "CCCommonConsts.h"
 
 namespace soomla {
     class CCProfileConsts {

@@ -6,18 +6,12 @@
 #define __CCProfileService_H_
 
 #include "cocos2d.h"
-#include "CCIStoreAssets.h"
 #include "CCError.h"
 #include "CCReward.h"
 #include "CCUserProfile.h"
 
 namespace soomla {
-	/** \class CCProfileController
-		\brief An interface to the native StoreController class.
 
-		An interface to the native StoreController class, use this class to
-		access the native StoreController functionality.
-	 */
     class CCProfileService: public cocos2d::Ref {
     public:
 		/**

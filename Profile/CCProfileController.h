@@ -6,7 +6,6 @@
 #define __CCProfileController_H_
 
 #include "cocos2d.h"
-#include "CCIStoreAssets.h"
 #include "CCError.h"
 #include "CCReward.h"
 #include "CCUserProfile.h"

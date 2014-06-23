@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CCProfileEventHandler.h"
+#include "CCAbstractAggregatedEventHandler.h"
 
 namespace soomla {
 
@@ -13,33 +14,14 @@ namespace soomla {
 		it to your event handler call addEventHandler(). You also set parameters
 		for StoreController through this class.
 	 */
-    class CCProfileEventDispatcher : public CCProfileEventHandler {
-	private:
-        cocos2d::__Set *mEventHandlers;
+    class CCProfileEventDispatcher : public CCAbstractAggregatedEventHandler<CCProfileEventHandler>, public CCProfileEventHandler {
     public:
 		/**
 		   This class is singleton, access it with this function.
 		 */
         static CCProfileEventDispatcher *getInstance();
 
-        CCProfileEventDispatcher():
-                mEventHandlers(NULL) {
-        }
         bool init();
-
-        virtual ~CCProfileEventDispatcher();
-
-		/**
-		   Add an event handler. This retains the event handler.
-		   \param eventHandler A pointer to the event handler you'd like to add.
-		 */
-		void addEventHandler(CCProfileEventHandler *eventHandler);
-
-		/**
-		   Remove an event handler. This releases the event handler.
-		   \param eventHandler A pointer to the event handler you'd like to remove.
-		*/
-		void removeEventHandler(CCProfileEventHandler *eventHandler);
 
         virtual void onLoginFailed(cocos2d::__String *errorDescription);
 

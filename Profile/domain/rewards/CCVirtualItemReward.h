@@ -6,7 +6,7 @@
 #define __CCVirtualItemReward_H_
 
 #include "CCReward.h"
-#include "CCCommonJsonConsts.h"
+#include "CCCommonConsts.h"
 
 namespace soomla {
     class CCVirtualItemReward : public CCReward {

@@ -28,9 +28,7 @@ cocos2d::__Dictionary *soomla::CCReward::toDictionary() {
     putNameToDict(dict);
     putRepeatableToDict(dict);
 
-    dict->setObject(cocos2d::__String::create(getType()), JSON_JSON_TYPE);
-
-    return dict;
+    return putTypeData(dict, getType());
 }
 
 soomla::CCReward::~CCReward() {

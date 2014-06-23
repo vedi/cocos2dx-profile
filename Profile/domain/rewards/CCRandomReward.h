@@ -7,8 +7,7 @@
 #define __CCRandomReward_H_
 
 #include "cocos2d.h"
-#include "SoomlaProfileMacros.h"
-#include "CCCommonJsonConsts.h"
+#include "CCSoomlaMacros.h"
 #include "CCAggregateReward.h"
 
 namespace soomla {

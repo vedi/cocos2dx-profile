@@ -7,7 +7,7 @@
 #define __CCReward_H_
 
 #include "cocos2d.h"
-#include "SoomlaProfileMacros.h"
+#include "CCSoomlaMacros.h"
 #include "CCProfileConsts.h"
 #include "CCDomain.h"
 

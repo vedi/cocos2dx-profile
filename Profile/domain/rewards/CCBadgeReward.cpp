@@ -41,8 +41,6 @@ bool soomla::CCBadgeReward::initWithDictionary(cocos2d::__Dictionary *dict) {
 
     fillIconUrlFromDict(dict);
 
-    dict->setObject(cocos2d::__String::create(CCProfileConsts::JSON_JSON_TYPE_BADGE), JSON_JSON_TYPE);
-
     return true;
 }
 

@@ -19,9 +19,10 @@ namespace soomla {
     }
 
     bool CCProfileEventDispatcher::init() {
-        
-        mEventHandlers = __Set::create();
-        mEventHandlers->retain();
+
+        if (!CCAbstractAggregatedEventHandler::init()) {
+            return false;
+        }
         
         CCEventDispatcher *eventDispatcher = CCEventDispatcher::getInstance();
 
@@ -123,18 +124,6 @@ namespace soomla {
         return true;
     }
 
-    CCProfileEventDispatcher::~CCProfileEventDispatcher() {
-        CC_SAFE_RELEASE(mEventHandlers);
-    }
-
-	void CCProfileEventDispatcher::addEventHandler(CCProfileEventHandler *eventHandler) {
-		mEventHandlers->addObject(eventHandler);
-	}
-
-	void CCProfileEventDispatcher::removeEventHandler(CCProfileEventHandler *eventHandler) {
-		mEventHandlers->removeObject(eventHandler);
-	}
-
     CCUserProfile *CCProfileEventDispatcher::extractUserProfile(Ref *userProfileRef) {
         __Dictionary *userProfileDict = dynamic_cast<__Dictionary *>(userProfileRef);
         CC_ASSERT(userProfileDict);
@@ -151,122 +140,93 @@ namespace soomla {
     }
 
     void CCProfileEventDispatcher::onLoginFailed(cocos2d::__String *errorDescription) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLoginFailed(errorDescription);
         }
     }
 
     void CCProfileEventDispatcher::onLoginFinished(CCUserProfile *userProfile) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLoginFinished(userProfile);
         }
     }
 
     void CCProfileEventDispatcher::onLoginStarted(cocos2d::__String *provider) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLoginStarted(provider);
         }
     }
 
     void CCProfileEventDispatcher::onLogoutFailed(cocos2d::__String *errorDescription) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLogoutFailed(errorDescription);
         }
     }
 
     void CCProfileEventDispatcher::onLogoutFinished(CCUserProfile *userProfile) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLogoutFinished(userProfile);
         }
     }
 
     void CCProfileEventDispatcher::onLogoutStarted(cocos2d::__String *provider) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLogoutStarted(provider);
         }
     }
 
     void CCProfileEventDispatcher::onGetContactsFailed(cocos2d::__String *socialActionType, cocos2d::__String *errorDescription) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onGetContactsFailed(socialActionType, errorDescription);
         }
     }
 
     void CCProfileEventDispatcher::onGetContactsFinished(cocos2d::__String *socialActionType, cocos2d::__Array *contactsDict) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onGetContactsFinished(socialActionType, contactsDict);
         }
     }
 
     void CCProfileEventDispatcher::onGetContactsStarted(cocos2d::__String *socialActionType) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onGetContactsStarted(socialActionType);
         }
     }
 
     void CCProfileEventDispatcher::onSocialActionFailedEvent(cocos2d::__String *socialActionType, cocos2d::__String *errorDescription) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onSocialActionFailedEvent(socialActionType, errorDescription);
         }
     }
 
     void CCProfileEventDispatcher::onSocialActionFinishedEvent(cocos2d::__String *socialActionType) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onSocialActionFinishedEvent(socialActionType);
         }
     }
 
     void CCProfileEventDispatcher::onSocialActionStartedEvent(cocos2d::__String *socialActionType) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onSocialActionStartedEvent(socialActionType);
         }
     }
 
     void CCProfileEventDispatcher::onLoginCancelledEvent() {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onLoginCancelledEvent();
         }
     }
 
     void CCProfileEventDispatcher::onRewardGivenEvent(CCReward *reward) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onRewardGivenEvent(reward);
         }
     }
 
     void CCProfileEventDispatcher::onUserProfileUpdatedEvent(CCUserProfile *userProfile) {
-        __SetIterator i;
-        for(i = mEventHandlers->begin(); i != mEventHandlers->end(); i++) {
-            CCProfileEventHandler *eventHandler = dynamic_cast<CCProfileEventHandler *>(*i);
+        FOR_EACH_EVENT_HANDLER(CCProfileEventHandler)
             eventHandler->onUserProfileUpdatedEvent(userProfile);
         }
     }
+
 }

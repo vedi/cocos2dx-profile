@@ -12,10 +12,8 @@
 #include "CCProfileController.h"
 
 using namespace cocos2d;
-typedef DictElement CCDictElement;
 
 namespace soomla {
-    #define TAG "SOOMLA StoreController"
 
     USING_NS_CC;
 
@@ -48,15 +46,15 @@ namespace soomla {
         CCNdkBridge::callNative(params, nullptr);
 
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_BADGE,
-                (TDomainCreator) &CCBadgeReward::createWithDictionary);
+                &CCBadgeReward::createWithDictionary);
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_RANDOM,
-                (TDomainCreator) &CCRandomReward::createWithDictionary);
+                &CCRandomReward::createWithDictionary);
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_SEQUENCE,
-                (TDomainCreator) &CCSequenceReward::createWithDictionary);
+                &CCSequenceReward::createWithDictionary);
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_ITEM,
-                (TDomainCreator) &CCVirtualItemReward::createWithDictionary);
+                &CCVirtualItemReward::createWithDictionary);
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_USER_PROFILE,
-                (TDomainCreator) &CCUserProfile::createWithDictionary);
+                &CCUserProfile::createWithDictionary);
 
         return CCProfileController::getInstance()->init();
     }

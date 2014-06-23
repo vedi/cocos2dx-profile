@@ -13,7 +13,6 @@
 #import "DomainHelper.h"
 #import "UserProfileNotFoundException.h"
 
-
 @interface ProfileService ()
 @end
 
@@ -125,7 +124,7 @@
 
     /* -= Exception handlers =- */
     void (^exceptionHandler)(NSException *, NSDictionary *, NSMutableDictionary *) = ^(NSException *exception, NSDictionary *parameters, NSMutableDictionary *retParameters) {
-        [retParameters setObject: NSStringFromClass([ProviderNotFoundException class]) forKey: @"errorInfo"];
+        [retParameters setObject: NSStringFromClass([exception class]) forKey: @"errorInfo"];
     };
     [ndkGlue registerExceptionHandlerForKey:NSStringFromClass([ProviderNotFoundException class]) withBlock:exceptionHandler];
     [ndkGlue registerExceptionHandlerForKey:NSStringFromClass([UserProfileNotFoundException class]) withBlock:exceptionHandler];
