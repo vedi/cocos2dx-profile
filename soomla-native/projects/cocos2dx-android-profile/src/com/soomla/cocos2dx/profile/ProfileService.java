@@ -7,9 +7,9 @@ import com.soomla.cocos2dx.common.NdkGlue;
 import com.soomla.profile.SoomlaProfile;
 import com.soomla.profile.domain.IProvider;
 import com.soomla.profile.domain.UserProfile;
-import com.soomla.profile.domain.rewards.*;
 import com.soomla.profile.exceptions.ProviderNotFoundException;
 import com.soomla.profile.exceptions.UserProfileNotFoundException;
+import com.soomla.rewards.*;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +47,7 @@ public class ProfileService {
 
         final DomainFactory domainFactory = DomainFactory.getInstance();
 
-        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_BADGE, new DomainFactory.Creator<BadgeReward>() {
+        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_BADGE, new DomainFactory.Creator<BadgeReward>() {
             @Override
             public BadgeReward create(JSONObject jsonObject) {
                 try {
@@ -57,7 +57,7 @@ public class ProfileService {
                 }
             }
         });
-        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_RANDOM, new DomainFactory.Creator<RandomReward>() {
+        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_RANDOM, new DomainFactory.Creator<RandomReward>() {
             @Override
             public RandomReward create(JSONObject jsonObject) {
                 try {
@@ -67,7 +67,7 @@ public class ProfileService {
                 }
             }
         });
-        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_SEQUENCE, new DomainFactory.Creator<SequenceReward>() {
+        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_SEQUENCE, new DomainFactory.Creator<SequenceReward>() {
             @Override
             public SequenceReward create(JSONObject jsonObject) {
                 try {
@@ -77,7 +77,7 @@ public class ProfileService {
                 }
             }
         });
-        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_ITEM, new DomainFactory.Creator<VirtualItemReward>() {
+        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_ITEM, new DomainFactory.Creator<VirtualItemReward>() {
             @Override
             public VirtualItemReward create(JSONObject jsonObject) {
                 try {
@@ -87,7 +87,7 @@ public class ProfileService {
                 }
             }
         });
-        domainFactory.registerCreator(ProfileJsonConsts.JSON_JSON_TYPE_USER_PROFILE, new DomainFactory.Creator<UserProfile>() {
+        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_USER_PROFILE, new DomainFactory.Creator<UserProfile>() {
             @Override
             public UserProfile create(JSONObject jsonObject) {
                 try {
