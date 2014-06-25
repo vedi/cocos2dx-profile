@@ -10,6 +10,7 @@
 #include "CCSequenceReward.h"
 #include "CCVirtualItemReward.h"
 #include "CCProfileController.h"
+#include "CCProfileEventDispatcher.h"
 
 using namespace cocos2d;
 
@@ -39,6 +40,8 @@ namespace soomla {
     }
 
     bool CCProfileService::init(__Dictionary *profileParams) {
+
+        CCProfileEventDispatcher::getInstance();    // to get sure it's inited
 
         __Dictionary *params = __Dictionary::create();
         params->setObject(__String::create("CCProfileService::init"), "method");
