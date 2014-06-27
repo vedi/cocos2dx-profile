@@ -26,10 +26,6 @@ namespace soomla {
         static char const *JSON_LANGUAGE;
         static char const *JSON_BIRTHDAY;
 
-        static char const *JSON_JSON_TYPE_BADGE;
-        static char const *JSON_JSON_TYPE_RANDOM;
-        static char const *JSON_JSON_TYPE_SEQUENCE;
-        static char const *JSON_JSON_TYPE_ITEM;
         static char const *JSON_JSON_TYPE_USER_PROFILE;
 
         static char const *EVENT_LOGIN_CANCELLED;

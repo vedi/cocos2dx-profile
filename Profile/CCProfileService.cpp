@@ -48,14 +48,6 @@ namespace soomla {
         params->setObject(profileParams, "params");
         CCNdkBridge::callNative(params, nullptr);
 
-        CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_BADGE,
-                &CCBadgeReward::createWithDictionary);
-        CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_RANDOM,
-                &CCRandomReward::createWithDictionary);
-        CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_SEQUENCE,
-                &CCSequenceReward::createWithDictionary);
-        CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_ITEM,
-                &CCVirtualItemReward::createWithDictionary);
         CCDomainFactory::getInstance()->registerCreator(CCProfileConsts::JSON_JSON_TYPE_USER_PROFILE,
                 &CCUserProfile::createWithDictionary);
 

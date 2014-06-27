@@ -21,10 +21,6 @@ namespace soomla {
     char const *CCProfileConsts::JSON_LANGUAGE = "language";
     char const *CCProfileConsts::JSON_BIRTHDAY = "birthday";
 
-    char const *CCProfileConsts::JSON_JSON_TYPE_BADGE = "badge";
-    char const *CCProfileConsts::JSON_JSON_TYPE_RANDOM = "random";
-    char const *CCProfileConsts::JSON_JSON_TYPE_SEQUENCE = "sequence";
-    char const *CCProfileConsts::JSON_JSON_TYPE_ITEM = "item";
     char const *CCProfileConsts::JSON_JSON_TYPE_USER_PROFILE = "userProfile";
 
     char const *CCProfileConsts::EVENT_LOGIN_CANCELLED = "com.soomla.profile.events.auth.LoginCancelledEvent";
