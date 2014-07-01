@@ -4,11 +4,6 @@
 
 #include "CCProfileController.h"
 #include "CCNdkBridge.h"
-#include "CCDomainFactory.h"
-#include "CCBadgeReward.h"
-#include "CCRandomReward.h"
-#include "CCSequenceReward.h"
-#include "CCVirtualItemReward.h"
 
 using namespace cocos2d;
 typedef DictElement CCDictElement;

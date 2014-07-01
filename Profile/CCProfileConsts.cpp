@@ -1,14 +1,6 @@
 #include "CCProfileConsts.h"
 
 namespace soomla {
-    char const *CCProfileConsts::JSON_REWARD_ID = "rewardId";
-    char const *CCProfileConsts::JSON_NAME = "name";
-    char const *CCProfileConsts::JSON_REPEATABLE = "repeatable";
-    char const *CCProfileConsts::JSON_ICON_URL = "iconUrl";
-    char const *CCProfileConsts::JSON_REWARDS = "rewards";
-    char const *CCProfileConsts::JSON_AMOUNT = "amount";
-    char const *CCProfileConsts::JSON_ASSOCIATED_ITEM_ID = "associatedItemId";
-
     char const *CCProfileConsts::JSON_PROVIDER = "provider";
     char const *CCProfileConsts::JSON_PROFILE_ID = "profileId";
     char const *CCProfileConsts::JSON_USERNAME = "username";

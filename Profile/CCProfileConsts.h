@@ -6,14 +6,6 @@
 namespace soomla {
     class CCProfileConsts {
     public:
-        static char const *JSON_REWARD_ID;
-        static char const *JSON_NAME;
-        static char const *JSON_REPEATABLE;
-        static char const *JSON_ICON_URL;
-        static char const *JSON_REWARDS;
-        static char const *JSON_AMOUNT;
-        static char const *JSON_ASSOCIATED_ITEM_ID;
-
         static char const *JSON_PROVIDER;
         static char const *JSON_PROFILE_ID;
         static char const *JSON_USERNAME;

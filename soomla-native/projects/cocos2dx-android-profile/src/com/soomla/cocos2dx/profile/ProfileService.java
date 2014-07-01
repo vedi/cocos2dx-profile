@@ -1,7 +1,7 @@
 package com.soomla.cocos2dx.profile;
 
-import android.app.Activity;
 import android.opengl.GLSurfaceView;
+import com.soomla.cocos2dx.common.AbstractSoomlaService;
 import com.soomla.cocos2dx.common.DomainFactory;
 import com.soomla.cocos2dx.common.NdkGlue;
 import com.soomla.profile.SoomlaProfile;
@@ -9,8 +9,7 @@ import com.soomla.profile.domain.IProvider;
 import com.soomla.profile.domain.UserProfile;
 import com.soomla.profile.exceptions.ProviderNotFoundException;
 import com.soomla.profile.exceptions.UserProfileNotFoundException;
-import com.soomla.rewards.*;
-import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
+import com.soomla.rewards.Reward;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,11 +20,10 @@ import java.lang.ref.WeakReference;
  *         date 6/10/14
  *         time 11:08 AM
  */
-public class ProfileService {
+public class ProfileService extends AbstractSoomlaService {
 
     private static ProfileService INSTANCE = null;
 
-    private static WeakReference<GLSurfaceView> glSurfaceViewRef = new WeakReference<GLSurfaceView>(null);
     private boolean inited = false;
 
     public static ProfileService getInstance() {
@@ -47,46 +45,6 @@ public class ProfileService {
 
         final DomainFactory domainFactory = DomainFactory.getInstance();
 
-        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_BADGE, new DomainFactory.Creator<BadgeReward>() {
-            @Override
-            public BadgeReward create(JSONObject jsonObject) {
-                try {
-                    return new BadgeReward(jsonObject);
-                } catch (JSONException e) {
-                    throw new IllegalStateException(e);
-                }
-            }
-        });
-        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_RANDOM, new DomainFactory.Creator<RandomReward>() {
-            @Override
-            public RandomReward create(JSONObject jsonObject) {
-                try {
-                    return new RandomReward(jsonObject);
-                } catch (JSONException e) {
-                    throw new IllegalStateException(e);
-                }
-            }
-        });
-        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_SEQUENCE, new DomainFactory.Creator<SequenceReward>() {
-            @Override
-            public SequenceReward create(JSONObject jsonObject) {
-                try {
-                    return new SequenceReward(jsonObject);
-                } catch (JSONException e) {
-                    throw new IllegalStateException(e);
-                }
-            }
-        });
-        domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_ITEM, new DomainFactory.Creator<VirtualItemReward>() {
-            @Override
-            public VirtualItemReward create(JSONObject jsonObject) {
-                try {
-                    return new VirtualItemReward(jsonObject);
-                } catch (JSONException e) {
-                    throw new IllegalStateException(e);
-                }
-            }
-        });
         domainFactory.registerCreator(ProfileConsts.JSON_JSON_TYPE_USER_PROFILE, new DomainFactory.Creator<UserProfile>() {
             @Override
             public UserProfile create(JSONObject jsonObject) {
@@ -213,11 +171,7 @@ public class ProfileService {
         inited = true;
     }
 
-    public void setActivity(Activity activity) {
-        NdkGlue.getInstance().setActivity(activity);
-    }
-
-    public void setGlSurfaceView(Cocos2dxGLSurfaceView glSurfaceView) {
+    public void setGlSurfaceView(GLSurfaceView glSurfaceView) {
         if (inited) {
             profileEventHandlerBridge.setGlSurfaceView(glSurfaceView);
         } else {

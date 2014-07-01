@@ -6,10 +6,6 @@ package com.soomla.cocos2dx.profile;
  *         time 6:49 PM
  */
 public class ProfileConsts {
-    public static final String JSON_JSON_TYPE_BADGE    = "badge";
-    public static final String JSON_JSON_TYPE_RANDOM   = "random";
-    public static final String JSON_JSON_TYPE_SEQUENCE = "sequence";
-    public static final String JSON_JSON_TYPE_ITEM     = "item";
     public static final String JSON_JSON_TYPE_USER_PROFILE = "userProfile";
 
     public static final String EVENT_AUTH_LOGIN_FAILED = "com.soomla.profile.events.auth.LoginFailedEvent";

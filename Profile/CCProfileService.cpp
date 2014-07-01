@@ -5,10 +5,6 @@
 #include "CCProfileService.h"
 #include "CCNdkBridge.h"
 #include "CCDomainFactory.h"
-#include "CCBadgeReward.h"
-#include "CCRandomReward.h"
-#include "CCSequenceReward.h"
-#include "CCVirtualItemReward.h"
 #include "CCProfileController.h"
 #include "CCProfileEventDispatcher.h"
 
