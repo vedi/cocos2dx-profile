@@ -1,7 +1,7 @@
 #include "CCProfileEventDispatcher.h"
 #include "CCDomainFactory.h"
 #include "CCDomainHelper.h"
-#include "CCEventDispatcher.h"
+#include "CCSoomlaEventDispatcher.h"
 
 namespace soomla {
 
@@ -24,7 +24,7 @@ namespace soomla {
             return false;
         }
         
-        CCEventDispatcher *eventDispatcher = CCEventDispatcher::getInstance();
+        CCSoomlaEventDispatcher *eventDispatcher = CCSoomlaEventDispatcher::getInstance();
 
         eventDispatcher->registerEventHandler(CCProfileConsts::EVENT_LOGIN_CANCELLED,
                 [this](__Dictionary *) {
