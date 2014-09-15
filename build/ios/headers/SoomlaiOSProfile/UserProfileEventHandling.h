@@ -21,6 +21,8 @@
 @class Reward;
 
 // Events
+#define EVENT_UP_PROFILE_INITIALIZED            @"up_profile_initialized"
+
 #define EVENT_UP_USER_PROFILE_UPDATED           @"up_user_profile_updated"
 
 #define EVENT_UP_LOGIN_STARTED                  @"up_login_started"
@@ -74,7 +76,12 @@
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
 /**
- Called when when a user profile from a provider has been retrieved
+Called when the service has been initializedt.
+*/
++ (void)postProfileInitialized;
+
+/**
+ Called when a user profile from a provider has been retrieved
  and updated in the device's local storage. Which fires the 
  `EVENT_UP_USER_PROFILE_UPDATED` event.
  
@@ -88,7 +95,7 @@
  
  @param provider The provider on where the login has started
  */
-+ (void)postLoginStarted:(enum Provider)provider;
++ (void)postLoginStarted:(Provider)provider;
 
 /**
  Called when the login process finishes successfully. Which fires the
@@ -105,7 +112,7 @@
  @param provider The provider on which the login has failed
  @param message a Description of the reason for failure
  */
-+ (void)postLoginFailed:(enum Provider)provider withMessage:(NSString *)message;
++ (void)postLoginFailed:(Provider)provider withMessage:(NSString *)message;
 
 /**
  Called the login process to a provider has been cancelled. Which fires the
@@ -113,7 +120,7 @@
  
  @param provider The provider on which the login has failed
  */
-+ (void)postLoginCancelled:(enum Provider)provider;
++ (void)postLoginCancelled:(Provider)provider;
 
 /**
  Called when the logout process from a provider has started. Which fires the
@@ -121,7 +128,7 @@
  
  @param provider The provider on which the login has started.
  */
-+ (void)postLogoutStarted:(enum Provider)provider;
++ (void)postLogoutStarted:(Provider)provider;
 
 /**
  Called when the logout process from a provider has finished. Which fires the
@@ -129,7 +136,7 @@
  
  @param provider The provider on which the logout has finished
  */
-+ (void)postLogoutFinished:(enum Provider)provider;
++ (void)postLogoutFinished:(Provider)provider;
 
 /**
  Called when the logout process from a provider has failed. Which fires the
@@ -138,7 +145,7 @@
  @param provider The provider on which the logout has failed
  @param message a Description of the reason for failure
  */
-+ (void)postLogoutFailed:(enum Provider)provider withMessage:(NSString *)message;
++ (void)postLogoutFailed:(Provider)provider withMessage:(NSString *)message;
 
 /**
  Called when a generic social action on a provider has started. Which fires the
@@ -147,7 +154,7 @@
  @param provider The provider on which the social action has started
  @param socialActionType The social action which started
  */
-+ (void)postSocialActionStarted:(enum Provider)provider withType:(enum SocialActionType)socialActionType;
++ (void)postSocialActionStarted:(Provider)provider withType:(SocialActionType)socialActionType;
 
 /**
  Called when a generic social action on a provider has finished. Which fires the
@@ -156,7 +163,7 @@
  @param provider The provider on which the social action has finished
  @param socialActionType The social action which finished
  */
-+ (void)postSocialActionFinished:(enum Provider)provider withType:(enum SocialActionType)socialActionType;
++ (void)postSocialActionFinished:(Provider)provider withType:(SocialActionType)socialActionType;
 
 /**
  Called when a generic social action on a provider has been cancelled. Which fires 
@@ -165,7 +172,7 @@
  @param provider The provider on which the social action has been cancelled
  @param socialActionType The social action which was cancelled
  */
-+ (void)postSocialActionCancelled:(enum Provider)provider withType:(enum SocialActionType)socialActionType;
++ (void)postSocialActionCancelled:(Provider)provider withType:(SocialActionType)socialActionType;
 
 /**
  Called when a generic social action on a provider has failed. Which fires the
@@ -175,7 +182,7 @@
  @param socialActionType The social action which failed
  @param message a Description of the reason for failure
  */
-+ (void)postSocialActionFailed:(enum Provider)provider withType:(enum SocialActionType)socialActionType withMessage:(NSString *)message;
++ (void)postSocialActionFailed:(Provider)provider withType:(SocialActionType)socialActionType withMessage:(NSString *)message;
 
 /**
  Called when the get contacts process from a provider has started. Which fires the
@@ -184,7 +191,7 @@
  @param provider The provider on which the get contacts process started
  @param socialActionType The social action which is preformed
  */
-+ (void)postGetContactsStarted:(enum Provider)provider withType:(enum SocialActionType)socialActionType;
++ (void)postGetContactsStarted:(Provider)provider withType:(SocialActionType)socialActionType;
 
 /**
  Called when the get contacts process from a provider has finished. Which fires the
@@ -194,7 +201,7 @@
  @param socialActionType The social action which is preformed
  @param contacts an Array of contacts represented by `UserProfile`
  */
-+ (void)postGetContactsFinished:(enum Provider)provider withType:(enum SocialActionType)socialActionType withContacts:(NSArray *)contacts;
++ (void)postGetContactsFinished:(Provider)provider withType:(SocialActionType)socialActionType withContacts:(NSArray *)contacts;
 
 /**
  Called when the get contacts process from a provider has failed. Which fires the
@@ -205,7 +212,7 @@
  @param socialActionType The social action which is preformed
  @param message a Description of the reason for failure
  */
-+ (void)postGetContactsFailed:(enum Provider)provider withType:(enum SocialActionType)socialActionType withMessage:(NSString *)message;
++ (void)postGetContactsFailed:(Provider)provider withType:(SocialActionType)socialActionType withMessage:(NSString *)message;
 
 /**
  Called when the get feed process from a provider has started. Which fires the
@@ -214,7 +221,7 @@
  @param provider The provider on which the get feed process started
  @param socialActionType The social action which is preformed
  */
-+ (void)postGetFeedStarted:(enum Provider)provider withType:(enum SocialActionType)socialActionType;
++ (void)postGetFeedStarted:(Provider)provider withType:(SocialActionType)socialActionType;
 
 /**
  Called when the get feed process from a provider has finished. Which fires the
@@ -224,7 +231,7 @@
  @param socialActionType The social action which is preformed
  @param feeds an Array of feed entries represented by `NSString`
  */
-+ (void)postGetFeedFinished:(enum Provider)provider withType:(enum SocialActionType)socialActionType withContacts:(NSArray *)feeds;
++ (void)postGetFeedFinished:(Provider)provider withType:(SocialActionType)socialActionType withContacts:(NSArray *)feeds;
 
 /**
  Called when the get feed process from a provider has failed. Which fires the
@@ -235,6 +242,6 @@
  @param socialActionType The social action which is preformed
  @param message a Description of the reason for failure
  */
-+ (void)postGetFeedFailed:(enum Provider)provider withType:(enum SocialActionType)socialActionType withMessage:(NSString *)message;
++ (void)postGetFeedFailed:(Provider)provider withType:(SocialActionType)socialActionType withMessage:(NSString *)message;
 
 @end
